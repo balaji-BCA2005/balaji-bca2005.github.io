@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Balaji's Projects — Portfolio</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#06b6d4;
+      --muted:#94a3b8;
+      --gap:16px;
+      --tile-min:160px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#e6eef6;background:linear-gradient(180deg,var(--bg),#071022);}
+    .wrap{max-width:1100px;margin:28px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    header h1{font-size:20px;margin:0}
+    header p{margin:0;color:var(--muted);font-size:13px}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--tile-min),1fr));gap:var(--gap)}
+
+    /* Tile (square) */
+    .tile{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
+      border:1px solid rgba(255,255,255,0.03);
+      padding:12px;display:flex;flex-direction:column;justify-content:space-between;border-radius:10px;overflow:hidden;position:relative;aspect-ratio:1/1; /* keeps square */
+      transition:transform .12s ease,box-shadow .12s ease;
+    }
+    .tile:hover{transform:translateY(-6px);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+
+    .tile .title{font-weight:600;margin:0 0 6px 0;font-size:16px}
+    .tile .desc{flex:1;color:var(--muted);font-size:13px;margin-bottom:10px}
+    .tile .meta{display:flex;gap:8px;align-items:center}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:6px 10px;border-radius:8px;font-size:13px;color:var(--accent);text-decoration:none}
+
+    /* Small helper: empty card placeholder */
+    .empty{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
+
+    /* Form */
+    .form{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .form input[type=text]{padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    .form button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#042b31;font-weight:600}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+    /* Responsive tweaks */
+    @media (max-width:520px){:root{--tile-min:130px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Balaji's Projects</h1>
+        <p>A simple portfolio — add links and a new square will appear automatically.</p>
+      </div>
+      <div style="text-align:right">
+        <p style="margin:0;color:var(--muted);font-size:12px">GitHub: <a href="https://github.com/balaji-bca2005" target="_blank" style="color:var(--accent)">balaji-bca2005</a></p>
+      </div>
+    </header>
+
+    <!-- Admin form to quickly add projects (local-only; stores to localStorage) -->
+    <section style="margin-bottom:16px">
+      <form id="addForm" class="form" onsubmit="return false;">
+        <input id="title" type="text" placeholder="Project title (e.g. Door Project)" required />
+        <input id="url" type="text" placeholder="Project URL (absolute or relative)" required />
+        <input id="desc" type="text" placeholder="Short description (optional)" />
+        <button id="addBtn">Add Project</button>
+        <button id="clearBtn" style="background:#ff7b7b">Clear All</button>
+      </form>
+      <p style="margin:8px 0 0;color:var(--muted);font-size:13px">Tip: You can also manually add anchor tags inside the <code>&lt;div id="raw-links"&gt;</code> (below) and click "Import anchors" to convert them into tiles.</p>
+    </section>
+
+    <!-- Hidden area where you can paste raw anchor tags if you prefer editing HTML directly -->
+    <section style="margin-bottom:18px">
+      <textarea id="raw-links" rows="3" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" placeholder="Paste anchor tags here, e.g. &lt;a href='https://...'>Project name&lt;/a&gt;"></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button id="importAnchors">Import anchors</button>
+        <button id="loadDefaults">Load example projects</button>
+      </div>
+    </section>
+
+    <!-- Projects grid -->
+    <main>
+      <div id="grid" class="grid" aria-live="polite"></div>
+      <div id="emptyMsg" class="empty" style="display:none;margin-top:12px">No projects yet — add one using the form above.</div>
+    </main>
+
+    <footer>
+      This page is auto-generated locally. To make changes permanently, edit <code>index.html</code> in your <code>balaji-bca2005.github.io</code> repository.
+    </footer>
+  </div>
+
+  <script>
+    // Storage key
+    const KEY = 'balaji_projects_v1';
+
+    // DOM refs
+    const grid = document.getElementById('grid');
+    const emptyMsg = document.getElementById('emptyMsg');
+
+    // Utility: read saved projects
+    function readProjects(){
+      try{const raw = localStorage.getItem(KEY); return raw? JSON.parse(raw): []}catch(e){return []}
+    }
+    function writeProjects(list){localStorage.setItem(KEY, JSON.stringify(list))}
+
+    // Render projects array to grid
+    function render(list){
+      grid.innerHTML = '';
+      if(!list || list.length===0){ emptyMsg.style.display='block'; return }
+      emptyMsg.style.display='none';
+      list.forEach(p => {
+        const a = document.createElement('a');
+        a.href = p.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.className = 'tile';
+
+        const title = document.createElement('h3');
+        title.className = 'title';
+        title.textContent = p.title || p.url;
+
+        const desc = document.createElement('div');
+        desc.className = 'desc';
+        desc.textContent = p.desc || '';
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        const btn = document.createElement('span');
+        btn.className = 'btn';
+        btn.textContent = 'Open';
+        meta.appendChild(btn);
+
+        a.appendChild(title);
+        a.appendChild(desc);
+        a.appendChild(meta);
+
+        grid.appendChild(a);
+      })
+    }
+
+    // Load and render on start
+    let projects = readProjects();
+    render(projects);
+
+    // Form handlers
+    document.getElementById('addForm').addEventListener('submit', e=>{
+      const title = document.getElementById('title').value.trim();
+      const url = document.getElementById('url').value.trim();
+      const desc = document.getElementById('desc').value.trim();
+      if(!title || !url) return alert('Please enter title and URL');
+      projects.unshift({title,url,desc});
+      writeProjects(projects);
+      render(projects);
+      document.getElementById('title').value='';document.getElementById('url').value='';document.getElementById('desc').value='';
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', e=>{
+      e.preventDefault();
+      if(confirm('Delete all saved projects from this browser?')){projects=[];writeProjects(projects);render(projects)}
+    })
+
+    // Import anchors from textarea
+    document.getElementById('importAnchors').addEventListener('click', ()=>{
+      const html = document.getElementById('raw-links').value;
+      if(!html.trim()) return alert('Paste anchor tags first');
+      // Create container and parse
+      const c = document.createElement('div');
+      c.innerHTML = html;
+      const anchors = Array.from(c.querySelectorAll('a'));
+      if(anchors.length===0) return alert('No anchor tags found');
+      anchors.forEach(a=>{
+        const title = (a.textContent||a.getAttribute('title')||a.href).trim();
+        const url = a.href;
+        projects.unshift({title,url,desc:''});
+      });
+      writeProjects(projects);render(projects);
+      document.getElementById('raw-links').value='';
+    })
+
+    // Load some example projects
+    document.getElementById('loadDefaults').addEventListener('click', ()=>{
+      const examples = [
+        {title:'Door Project','url':'https://balaji-bca2005.github.io/door.github.io/','desc':'A small door control demo.'},
+        {title:'Calculator','url':'https://balaji-bca2005.github.io/calc-app/','desc':'Simple calculator app.'},
+        {title:'Todo List','url':'https://balaji-bca2005.github.io/todo-app/','desc':'Tasks manager built with JS.'}
+      ];
+      projects = examples.concat(projects);
+      writeProjects(projects);render(projects);
+    })
+
+    // Optional: if user manually edits the HTML and adds <a> tags under a special container in the markup,
+    // you could parse them on load too.  For now the importAnchors button covers that use-case.
+
+  </script>
+</body>
+</html>
