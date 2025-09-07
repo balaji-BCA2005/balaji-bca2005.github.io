@@ -1,151 +1,402 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Balaji's Portfolio with Logo ..</title>
-  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Balaji | Web Designer & Developer Enthusiast</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, #0f1724, #071022);
-      color: #e6eef6;
+      background: radial-gradient(circle at top left, #5ea4f3 16%, #e9f3fe 80%);
+      color: #192130;
+      min-height: 100vh;
     }
 
-    header {
-      background: #0b1220;
-      padding: 24px 0 16px 0;
-    }
-
-    .wrap {
-      max-width: 1100px;
-      margin: 28px auto;
-      padding: 20px;
-    }
-
+    /* Sticky glass-morphic navbar */
     nav {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
+      gap: 20px;
+      padding: 36px 60px 12px 0;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.6);
+      z-index: 10;
+      transition: background 0.3s;
+    }
+
+    nav:hover {
+      background: rgba(255, 255, 255, 0.8);
     }
 
     .logo {
-      font-weight: bold;
-      color: #06b6d4;
-      font-size: 22px;
+      font-weight: 900;
+      color: #2464df;
+      font-size: 34px;
+      letter-spacing: .04em;
+      margin-right: auto;
+      background: linear-gradient(90deg, #2a85f5, #0ce2fa 85%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    nav ul {
-      display: flex;
-      gap: 18px;
-      list-style: none;
-    }
-
-    nav ul li a {
-      color: #e6eef6;
+    nav a {
+      color: #2464df;
       text-decoration: none;
+      font-weight: 700;
+      font-size: 1.12rem;
+      border-radius: 28px;
+      padding: 8px 28px;
+      transition: background .19s, color .16s;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+
+    nav a.active,
+    nav a:hover {
+      background: #2464df;
+      color: #fff;
+    }
+
+    /* Hero section & existing layout styles (kept unchanged except fade-in classes) */
+    .hero-section {
+      max-width: 1000px;
+      margin: 118px auto 0 auto;
+      background: #f6f9fe;
+      border-radius: 38px;
+      box-shadow: 0 10px 48px #73a8e965, 0 3px 20px #0776ea29;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 64px 48px 39px 70px;
+      position: relative;
+      overflow: visible;
+      z-index: 1;
+    }
+
+    .hero-content {
+      flex: 1.7;
+      z-index: 1;
+    }
+
+    .intro-hi {
+      font-size: 1.18rem;
+      background: #e5f0ff;
+      display: inline-block;
+      padding: 3px 15px 3px 13px;
+      border-radius: 10px;
       font-weight: 600;
+      color: #1869e1;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 7px #79c9ff1a;
     }
 
-    nav ul li a:hover {
-      color: #06b6d4;
+    .hero-content h1 {
+      font-size: 2.68rem;
+      font-weight: 800;
+      margin: 17px 0 16px 0;
+      color: #1a2442;
+      line-height: 1.13;
+      letter-spacing: .02em;
     }
 
-    .hero {
-      text-align: center;
-      margin: 36px 0;
+    .hero-content h1 .highlight {
+      color: #2464df;
+      text-decoration: underline;
+      text-decoration-thickness: 2.5px;
+      text-underline-offset: 7px;
     }
 
-    .hero button {
-      background: #06b6d4;
-      color: #0b1220;
+    .hero-content .desc {
+      color: #5070aa;
+      font-size: 1.13rem;
+      font-weight: 500;
+      margin: 18px 0 0 0;
+      max-width: 400px;
+    }
+
+    /* Button hover animations */
+
+    /* Liquid morph – Hire Me */
+    .hero-btns .liquid-btn {
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      font-size: 1.07rem;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 26px;
+      background: #2464df;
+      transition: color 0.3s ease;
+      animation-name: hire;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
       border: none;
-      padding: 12px 26px;
-      border-radius: 8px;
-      font-size: 16px;
+      cursor: pointer;
+      z-index: 1;
+      margin-right: 22px;   
+    box-shadow: 0 2px 8px #a2e0ff3d;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      
+
+    }
+    @keyframes hire {
+      50% {
+        background: #3a8bf7;
+      }
+
+      25% {
+        background: #1e5ed0;
+      }
     }
 
-    section {
-      margin: 44px auto;
-      max-width: 800px;
+    .hero-btns .liquid-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: conic-gradient(from 90deg at 50% 50%, cyan, blue);
+      transition: transform 0.6s ease;
+      z-index: -1;
     }
 
-    h2 {
-      color: #06b6d4;
+    .hero-btns .liquid-btn:hover::before {
+      transform: translateX(50%);
+    }
+
+    .hero-btns .liquid-btn:hover {
+      color: #fff;
+    }
+
+    /* Rotating glow border – Whatsapp */
+    .hero-btns .glow-btn {
+      --angle: 0deg;
+      position: relative;
+      padding: 14px 29px;
+      border-radius: 26px;
+      background: #f4f9ff;
+      color: #2464df;
+      border: 2px solid transparent;
+      z-index: 1;
+      background-color: lightblue;
+      font-size: 1.07rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      animation-name: wts;
+      animation-duration: 3s;
+      animation-iteration-count: 5;
+      
+
+    }
+    
+    @keyframes wts {
+      50% {
+        background-color: orange;
+      }
+
+      50% {
+        background-color: white;
+      }
+
+      25% {
+        background-color: goldenrod;
+      }
+    }
+
+    .hero-btns .glow-btn::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: conic-gradient(from var(--angle), cyan, magenta, yellow, cyan);
+      border-radius: inherit;
+      z-index: -2;
+      filter: blur(8px);
+      animation: rotate 5s linear infinite;
+    }
+
+    @keyframes rotate {
+      to {
+        --angle: 360deg;
+      }
+    }
+
+    .hero-btns .glow-btn:hover {
+      color: #2464df;
+    }
+
+    /* Fade-in on scroll animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Remaining sections and responsive styles unchanged... */
+    .skills-bar {
+      width: 960px;
+      max-width: 99vw;
+      margin: 22px auto 24px auto;
+      display: flex;
+      gap: 42px;
+      padding: 14px 10px 14px 10px;
+      justify-content: center;
+      background: linear-gradient(90deg, #2464df 19%, #19b4fd 116%);
+      border-radius: 17px;
+      box-shadow: 0 6px 20px #6bacff1a;
+      position: relative;
+      z-index: 10;
+    }
+
+    .skill-tab {
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.09rem;
+      padding: 5px 25px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      margin: 0;
+      letter-spacing: .15px;
+      box-shadow: 0 0px 10px #ffffff13;
+    }
+
+    .section-block {
+      max-width: 1000px;
+      margin: 38px auto;
+      background: #f6f9fe;
+      border-radius: 30px;
+      box-shadow: 0 8px 44px #8cc7f149;
+      padding: 42px 30px 28px 30px;
+      font-size: 1.08rem;
+      color: #2d3867;
+      z-index: 1;
+    }
+
+    .section-block h2 {
+      color: #2464df;
       margin-bottom: 18px;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .projects-section {
+      max-width: 1000px;
+      margin: 44px auto 0 auto;
+      background: #f6f9fe;
+      border-radius: 38px;
+      box-shadow: 0 8px 48px #73a8e965;
+      padding: 46px 33px 27px 33px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .projects-section h2 {
+      color: #2464df;
+      font-weight: 800;
+      font-size: 2rem;
+      margin-bottom: 25px;
+      text-align: left;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+      margin-bottom: 16px;
     }
 
     .card {
-      background: #0b1220;
-      border-radius: 10px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #53bafd2c;
       overflow: hidden;
-      box-shadow: 0 8px 30px rgba(2, 6, 23, 0.3);
       cursor: pointer;
-      transition: transform .1s;
-      padding-bottom: 8px;
-      position: relative;
+      transition: transform .13s, box-shadow .13s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(6, 182, 212, .13);
+      transform: translateY(-5px) scale(1.025);
+      box-shadow: 0 8px 32px #0a9cff39;
     }
 
-    .card .img {
-      height: 110px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #06b6d4;
-    }
-
-    .card .img img {
+    .img {
       width: 100%;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 10px 10px 0 0;
+      height: 118px;
+      background: #ecf5fe;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid #e4ebf4;
     }
 
-    .card .img span {
-      color: #fff;
-      font-size: 22px;
+    .img img {
+      max-height: 80px;
+      max-width: 75%;
+      border-radius: 10px 10px 0 0;
+      background: #fff;
+    }
+
+    .img span {
+      color: #2464df;
+      font-size: 2.1rem;
       font-weight: bold;
     }
 
     .card h3 {
-      margin: 10px 6px 4px 6px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      margin: 13px 0 7px 16px;
+      color: #182649;
     }
 
     .card p {
-      color: #94a3b8;
-      margin: 0 8px 10px 8px;
-      font-size: 14px;
+      color: #4b6cae;
+      margin: 0 16px 12px 16px;
+      font-size: 0.99rem;
+      min-height: 38px;
     }
 
     .meta {
-      margin: 0 0 12px 8px;
-      display: flex;
-      gap: 6px;
-      align-items: center;
+      margin: 0 0 15px 16px;
     }
 
     .openbtn {
-      border-radius: 6px;
-      padding: 4px 12px;
+      background: linear-gradient(90deg, #2464df, #3a8bf7 98%);
+      color: #fff;
       border: none;
-      font-weight: 600;
-      font-size: 13px;
+      padding: 8px 22px;
+      border-radius: 13px;
+      font-weight: bold;
+      font-size: 1rem;
       cursor: pointer;
-      background: #06b6d4;
-      color: #071022;
+      margin-top: 6px;
+      box-shadow: 0 2px 8px #a2e0ff3d;
+      transition: background .13s;
+    }
+
+    .openbtn:hover {
+      background: linear-gradient(90deg, #3a8bf7, #2464df 115%);
     }
 
     .modal {
@@ -156,82 +407,263 @@
       top: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(15, 23, 36, 0.86);
+      background: rgba(21, 45, 103, 0.77);
+      backdrop-filter: blur(7px);
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+    }
+
+    .modal.active {
+      display: flex;
     }
 
     .modal-content {
-      background: #181e2b;
-      margin: 100px auto;
-      padding: 32px 24px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 480px;
+      background: #fafdff;
+      border-radius: 19px;
+      padding: 34px 26px 26px 26px;
+      max-width: 720px;
+      width: 94vw;
+      box-shadow: 0 8px 44px #53bafd3a;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      max-height: 92vh;
+      overflow-y: auto;
     }
 
-    .close {
+    .modal-title {
+      color: #2464df;
+      font-weight: 800;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .modal-close {
       position: absolute;
       top: 16px;
-      right: 22px;
-      color: #06b6d4;
-      font-size: 36px;
-      
+      right: 24px;
+      color: #2464df;
+      font-size: 34px;
+      font-weight: 700;
+      background: none;
+      border: none;
       cursor: pointer;
+      z-index: 4;
     }
 
-    @media(max-width:600px) {
-      .grid {
-        grid-template-columns: 1fr;
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    /* Responsive queries (untouched) */
+
+    @media (max-width: 1100px) {
+
+      .hero-section,
+      .skills-bar,
+      .projects-section,
+      .section-block {
+        max-width: 98vw;
       }
 
-      .wrap {
-        padding: 4px;
+      nav {
+        padding: 30px 3vw 10px 0;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-section {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 30px 4vw 20px 4vw;
+      }
+
+      .profile-art {
+        margin-bottom: 22px;
+      }
+
+      .skills-bar {
+        flex-wrap: wrap;
+        gap: 19px;
+        font-size: 0.97rem;
+        padding: 9px 2vw;
+      }
+
+      .header-bar {
+        font-size: 2.5rem;
+        margin-top: 12px;
+      }
+
+      .projects-section,
+      .section-block {
+        padding: 24px 8px 16px 8px;
       }
 
       .modal-content {
-        padding: 18px 8px;
+        max-width: 98vw;
+        padding: 14px 6px;
+      }
+
+      .modal-grid {
+        grid-template-columns: 1fr;
+        gap: 17px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-section {
+        padding: 13px 1.4vw 10px 1.3vw;
+      }
+
+      .profile-art img {
+        width: 109px;
+        height: 162px;
+      }
+
+      .profile-art .circle-bg {
+        width: 97px;
+        height: 97px;
+        left: 6px;
+        top: 9px;
+      }
+
+      .badge {
+        bottom: 2px;
+        right: 2px;
+        font-size: .85rem;
+        padding: 6px 12px;
+      }
+
+      .skills-bar {
+        gap: 10px;
+        padding: 7px 0;
+        font-size: 0.97rem;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      nav {
+        padding: 17px 4vw 2px 0;
+      }
+
+      .grid,
+      .modal-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .section-block,
+      .projects-section {
+        padding: 11px 2px 8px 2px;
       }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="wrap">
-      <nav>
-        <span class="logo">Balaji</span>
-        <ul>
-          <li><a href="#projects">Projects</a></li>
-        </ul>
-      </nav>
-      <div class="hero">
-        <h1>Hi, I'm Balaji</h1>
-        <p>Website Devolopment l React Devoloper l Frontend Devolopment</p>
-        <button onclick="window.location='#projects'">View Projects</button>
+  <nav>
+    <span class="logo">Balaji</span>
+    <a href="#home" class="active">Home</a>
+    <a href="#services">Services</a>
+    <a href="#about">About me</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact me</a>
+  </nav>
+
+  <div class="header-bar">PORTFOLIO</div>
+
+  <section class="hero-section fade-in" id="home">
+    <div class="hero-content">
+      <div class="intro-hi">Hello !</div>
+      <h1>
+        I'm <span class="highlight">Balaji Mahadev Nagmoti,</span>
+        Web Designer &<br> Developer
+      </h1>
+      <div class="desc">
+
+      </div>
+      <div class="hero-btns">
+        <button class="liquid-btn">Hire Me</button>
+        <a href="https://wa.me/+917083542769" class="glow-btn">Whatsapp</a>
       </div>
     </div>
-  </header>
-  <main>
-    <div class="wrap">
-      <!-- Projects grid -->
-      <section>
-        <h2 id="projects">My Projects</h2>
-        <div id="grid" class="grid" aria-live="polite"></div>
-        <div id="emptyMsg" style="color:#94a3b8;font-size:15px;margin-top:12px;display:none;">No projects yet — please
-          add manually in code.</div>
-      </section>
+    <div class="profile-art">
+      <div class="circle-bg"></div>
+      <img src="d.png" alt="Balaji's photo">
+      <span class="badge">UI/UX Designer</span>
     </div>
-    <!-- Modal for project details - not used in this version -->
-    <div id="modal" class="modal">
-      <div class="modal-content" id="modal-content"></div>
+  </section>
+
+  <div class="skills-bar fade-in" id="services">
+    <div class="skill-tab">Digital Marketing</div>
+    <div class="skill-tab">Website Development</div>
+    <div class="skill-tab">UI/UX Design</div>
+
+  </div>
+
+  <section id="about" class="section-block fade-in">
+    <h2>About Me</h2>
+    <p>
+      Hi, I’m Balaji Nagmoti!
+      I am a BCA student at SRTMUN University, Latur, with hands-on experience in web development using the MERN stack,
+      React, HTML, CSS, JavaScript, and database technologies. I am passionate about building modern, responsive
+      websites and applications, and I’m always eager to learn new tools and frameworks to enhance my skills. This
+      portfolio showcases my academic and personal projects, demonstrating my commitment to continuous learning and
+      growth in the field of software development.<br>
+
+    </p>
+  </section>
+
+  <section class="projects-section fade-in" id="projects">
+    <h2>My Projects</h2>
+    <div id="grid" class="grid" aria-live="polite"></div>
+    <div id="emptyMsg" style="color:#94a3b8;font-size:15px;margin-top:12px;display:none;">
+      No projects yet — please add manually in code.
     </div>
-  </main>
-  <footer style="text-align:center; color:#94a3b8; margin-top:32px;">
-    © 2025 Balaji | All rights reserved.
-  </footer>
+  </section>
+
+  <section id="contact" class="section-block fade-in">
+    <h2>Contact Me</h2>
+    <p>
+      Email:<a href="mailto:balajinagmotibca01@gmail.com">balajinagmotibca01@gmail.com</a><br>
+      WhatsApp: +91-7083542769<br>
+
+    </p>
+  </section>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-title">All Projects</div>
+      <div id="modalGrid" class="modal-grid"></div>
+    </div>
+  </div>
+
   <script>
+    // Scroll-triggered fade-in animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Projects and modal functionality
     const grid = document.getElementById('grid');
     const emptyMsg = document.getElementById('emptyMsg');
+    const modal = document.getElementById('modal');
+    const modalGrid = document.getElementById('modalGrid');
+    const modalClose = document.querySelector('.modal-close');
 
     const projects = [
       {
@@ -246,9 +678,39 @@
         desc: "A simple door shop Web-Design",
         logo: "D.png"
       }
-
     ];
 
+    function createCard(p) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      const img = document.createElement('div');
+      img.className = 'img';
+      if (p.logo) {
+        img.innerHTML = `<img src="${p.logo}" alt="Project Logo">`;
+      } else {
+        img.innerHTML = `<span>${p.title ? p.title.charAt(0).toUpperCase() : "P"}</span>`;
+      }
+      card.appendChild(img);
+
+      const h3 = document.createElement('h3');
+      h3.textContent = p.title || p.url;
+      card.appendChild(h3);
+
+      const desc = document.createElement('p');
+      desc.textContent = p.desc || '';
+      card.appendChild(desc);
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      const open = document.createElement('button');
+      open.className = "openbtn";
+      open.textContent = "Open";
+      open.onclick = (e) => { e.stopPropagation(); window.open(p.url, '_blank'); };
+      meta.appendChild(open);
+      card.appendChild(meta);
+
+      return card;
+    }
 
     function render(list) {
       grid.innerHTML = '';
@@ -257,41 +719,24 @@
         return;
       }
       emptyMsg.style.display = 'none';
-      list.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'card';
-
-        const img = document.createElement('div');
-        img.className = 'img';
-        if (p.logo) {
-          img.innerHTML = `<img src="${p.logo}" alt="Project Logo">`;
-        } else {
-          img.innerHTML = `<span>${p.title ? p.title.charAt(0).toUpperCase() : "P"}</span>`;
-        }
-        card.appendChild(img);
-
-        const h3 = document.createElement('h3');
-        h3.textContent = p.title || p.url;
-        card.appendChild(h3);
-
-        const desc = document.createElement('p');
-        desc.textContent = p.desc || '';
-        card.appendChild(desc);
-
-        const meta = document.createElement('div');
-        meta.className = 'meta';
-
-        const open = document.createElement('button');
-        open.className = "openbtn";
-        open.textContent = "Open";
-        open.onclick = (e) => { e.stopPropagation(); window.open(p.url, '_blank'); };
-
-        meta.appendChild(open);
-        card.appendChild(meta);
-
+      list.forEach((p, i) => {
+        const card = createCard(p);
+        card.onclick = () => openModal();
         grid.appendChild(card);
       });
     }
+
+    function openModal() {
+      modalGrid.innerHTML = '';
+      projects.forEach((p) => {
+        const card = createCard(p);
+        card.onclick = null;
+        modalGrid.appendChild(card);
+      });
+      modal.classList.add('active');
+    }
+    modalClose.onclick = () => { modal.classList.remove('active'); };
+    modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
 
     render(projects);
   </script>
