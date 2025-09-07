@@ -32,18 +32,23 @@
 
     nav:hover {
       background: rgba(255, 255, 255, 0.8);
+
     }
 
     .logo {
       font-weight: 900;
       color: #2464df;
-      font-size: 34px;
+      font-size: 30px;
       letter-spacing: .04em;
       margin-right: auto;
-      background: linear-gradient(90deg, #2a85f5, #0ce2fa 85%);
+      background: linear-gradient(45deg, #b8f52a, #00e1fa );
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 5px #ffffff70;
+      cursor: pointer;
+      user-select: none;
+      
     }
 
     nav a {
@@ -62,15 +67,16 @@
     nav a.active,
     nav a:hover {
       background: #2464df;
-      color: #fff;
+      color: #e6a8c4;
     }
 
     /* Hero section & existing layout styles (kept unchanged except fade-in classes) */
     .hero-section {
       max-width: 1000px;
       margin: 118px auto 0 auto;
-      background: #f6f9fe;
-      border-radius: 38px;
+      background: hwb(60 97% 2%);
+      border-bottom-right-radius: 50px;
+      border-top-left-radius: 50px;
       box-shadow: 0 10px 48px #73a8e965, 0 3px 20px #0776ea29;
       display: flex;
       align-items: center;
@@ -84,11 +90,14 @@
     .hero-content {
       flex: 1.7;
       z-index: 1;
+      text-align: left;
+      user-select: none;
+      position: relative;
     }
 
     .intro-hi {
       font-size: 1.18rem;
-      background: #e5f0ff;
+      background: #e9ecf0;
       display: inline-block;
       padding: 3px 15px 3px 13px;
       border-radius: 10px;
@@ -108,10 +117,14 @@
     }
 
     .hero-content h1 .highlight {
-      color: #2464df;
-      text-decoration: underline;
-      text-decoration-thickness: 2.5px;
-      text-underline-offset: 7px;
+      color: rgb(255, 145, 0);
+      text-decoration: none;
+      font-weight: 900;
+      background: linear-gradient(deg, orange 10%, red 10%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      te
+    
     }
 
     .hero-content .desc {
@@ -141,14 +154,15 @@
       border: none;
       cursor: pointer;
       z-index: 1;
-      margin-right: 22px;   
-    box-shadow: 0 2px 8px #a2e0ff3d;
+      margin-right: 22px;
+      box-shadow: 0 2px 8px #a2e0ff3d;
       text-decoration: none;
       display: inline-block;
       text-align: center;
-      
+
 
     }
+
     @keyframes hire {
       50% {
         background: #3a8bf7;
@@ -194,14 +208,14 @@
       font-weight: 700;
       text-decoration: none;
       cursor: pointer;
-      transition: color 0.3s ease;
+
       animation-name: wts;
       animation-duration: 3s;
       animation-iteration-count: 5;
-      
+
 
     }
-    
+
     @keyframes wts {
       50% {
         background-color: orange;
@@ -341,13 +355,19 @@
     }
 
     .img {
-      width: 100%;
-      height: 118px;
+      width: 150px;
+      height: 200px;
       background: #ecf5fe;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-bottom: 1px solid #e4ebf4;
+      border-bottom: 5px solid #e4ebf4;
+   border: 2px solid black;
+      margin: 16px auto 0 auto;
+      border-radius: 10px;
+      border-bottom-left-radius: 5px;
+      border-top-right-radius: 5px;
+   
     }
 
     .img img {
@@ -497,6 +517,9 @@
       .header-bar {
         font-size: 2.5rem;
         margin-top: 12px;
+        text-align: center;
+        color: wheat;
+        font-size: xx-large;
       }
 
       .projects-section,
@@ -530,6 +553,12 @@
         height: 97px;
         left: 6px;
         top: 9px;
+        filter: blur(28px);
+        opacity: 0.28;
+        
+
+        
+        
       }
 
       .badge {
@@ -537,6 +566,9 @@
         right: 2px;
         font-size: .85rem;
         padding: 6px 12px;
+      }
+      .hero-content h1 {
+        font-size: 1.9rem;
       }
 
       .skills-bar {
@@ -563,6 +595,7 @@
       .projects-section {
         padding: 11px 2px 8px 2px;
       }
+      
     }
   </style>
 </head>
@@ -577,14 +610,13 @@
     <a href="#contact">Contact me</a>
   </nav>
 
-  <div class="header-bar">PORTFOLIO</div>
-
+  
   <section class="hero-section fade-in" id="home">
     <div class="hero-content">
       <div class="intro-hi">Hello !</div>
       <h1>
-        I'm <span class="highlight">Balaji Mahadev Nagmoti,</span>
-        Web Designer &<br> Developer
+       <span class="highlight">Balaji Mahadev Nagmoti</span>
+       
       </h1>
       <div class="desc">
 
@@ -596,7 +628,7 @@
     </div>
     <div class="profile-art">
       <div class="circle-bg"></div>
-      <img src="d.png" alt="Balaji's photo">
+      <img class="img" src="images/balaji.jpg" alt="Balaji's photo">
       <span class="badge">UI/UX Designer</span>
     </div>
   </section>
@@ -609,7 +641,8 @@
   </div>
 
   <section id="about" class="section-block fade-in">
-    <h2>About Me</h2>
+   
+    <h2 style="text-align: center;"text-decoration>About Me</h2>
     <p>
       Hi, I’m Balaji Nagmoti!
       I am a BCA student at SRTMUN University, Latur, with hands-on experience in web development using the MERN stack,
@@ -632,9 +665,12 @@
   <section id="contact" class="section-block fade-in">
     <h2>Contact Me</h2>
     <p>
-      Email:<a href="mailto:balajinagmotibca01@gmail.com">balajinagmotibca01@gmail.com</a><br>
-      WhatsApp: +91-7083542769<br>
-
+      <strong>Email:</strong>
+      <a href="mailto:balajinagmotibca01@gmail.com" style="color:#2464df;font-weight:bold;text-decoration:underline;">
+        balajinagmotibca01@gmail.com
+      </a>
+      <br>
+      <strong>WhatsApp:</strong> +91-7083542769<br>
     </p>
   </section>
 
@@ -670,13 +706,13 @@
         title: "Clock Digital",
         url: "https://balaji-bca2005.github.io/clock.github.io/",
         desc: "A simple analog/digital clock project.",
-        logo: "clock.png"
+        logo: "images/clock.png"
       },
       {
         title: "Door Shop",
         url: "https://balaji-bca2005.github.io/door.github.io/",
         desc: "A simple door shop Web-Design",
-        logo: "D.png"
+        logo: "images/D.png"
       }
     ];
 
