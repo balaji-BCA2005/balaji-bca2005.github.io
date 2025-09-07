@@ -27,15 +27,7 @@
     .card h3 { margin:10px 6px 4px 6px;}
     .card p { color:#94a3b8; margin:0 8px 10px 8px; font-size:14px;}
     .meta { margin:0 0 12px 8px; display:flex; gap:6px; align-items:center;}
-    .openbtn, .removebtn { border-radius:6px; padding:4px 12px; border:none; font-weight:600; font-size:13px; cursor:pointer; }
-    .openbtn { background:#06b6d4; color:#071022; }
-    .removebtn { background:#ff5c5c; color:#fff; }
-    .form { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:8px;}
-    .form input { padding:8px 10px; border-radius:7px; border:1px solid #222a38; background:#14213d; color:#e6eef6;}
-    .form button { padding:8px 14px; border-radius:8px; border:none; background:#06b6d4; color:#042b31; font-weight:600; }
-    .form button.clear { background:#ff7b7b; color:#071022;}
-    .form-btns{display:flex; gap:8px; margin-top:8px;}
-    textarea { width:100%; padding:10px; border-radius:8px; border:1px solid #263043; background:#14213d; color:#e6eef6; margin-bottom:6px;}
+    .openbtn { border-radius:6px; padding:4px 12px; border:none; font-weight:600; font-size:13px; cursor:pointer; background:#06b6d4; color:#071022; }
     .modal { display:none; position:fixed; z-index:900; left:0; top:0; width:100vw; height:100vh; background:rgba(15,23,36,0.86);}
     .modal-content { background:#181e2b; margin:100px auto; padding:32px 24px; border-radius:12px; width:90%; max-width:480px; position:relative;}
     .close { position:absolute; top:16px; right:22px; color:#06b6d4; font-size:36px; cursor:pointer;}
@@ -60,29 +52,14 @@
   </header>
   <main>
     <div class="wrap">
-      <!-- Add Project Form -->
-      <section>
-        <h2 id="projects">My Projects</h2>
-        <form id="addForm" class="form" onsubmit="return false;">
-          <input id="title" type="text" placeholder="Title (e.g. Door Project)" required />
-          <input id="url" type="text" placeholder="Project URL" required />
-          <input id="desc" type="text" placeholder="Short Description (optional)" />
-          <input id="logo" type="text" placeholder="Logo Image URL (optional)" />
-          <button id="addBtn">Add Project</button>
-          <button id="clearBtn" class="clear">Clear All</button>
-        </form>
-        <textarea id="raw-links" rows="2" placeholder="Paste anchor tags here, e.g. &lt;a href='...'>Project name&lt;/a&gt;"></textarea>
-        <div class="form-btns">
-          <button id="importAnchors">Import anchors</button>
-        </div>
-      </section>
       <!-- Projects grid -->
       <section>
+        <h2 id="projects">My Projects</h2>
         <div id="grid" class="grid" aria-live="polite"></div>
-        <div id="emptyMsg" style="color:#94a3b8;font-size:15px;margin-top:12px;display:none;">No projects yet — add one above.</div>
+        <div id="emptyMsg" style="color:#94a3b8;font-size:15px;margin-top:12px;display:none;">No projects yet — please add manually in code.</div>
       </section>
     </div>
-    <!-- Modal for project details -->
+    <!-- Modal for project details - not used in this version -->
     <div id="modal" class="modal">
       <div class="modal-content" id="modal-content"></div>
     </div>
@@ -91,121 +68,62 @@
     © 2025 Balaji | All rights reserved.
   </footer>
   <script>
-    const KEY = 'balaji_projects_v1';
     const grid = document.getElementById('grid');
     const emptyMsg = document.getElementById('emptyMsg');
 
-    function readProjects(){ try{const raw=localStorage.getItem(KEY); return raw?JSON.parse(raw):[] }catch(e){return[]} }
-    function writeProjects(list){ localStorage.setItem(KEY, JSON.stringify(list)) }
+    const projects = [
+      {
+        title: "Clock Project",
+        url: "https://balaji-bca2005.github.io/clock.github.io/",
+        desc: "A simple analog/digital clock project.",
+        logo: "https://balaji-bca2005.github.io/clock.github.io/favicon.ico"
+      }
+    ];
 
     function render(list){
       grid.innerHTML = '';
-      if(!list || list.length === 0){ emptyMsg.style.display='block'; return }
+      if(!list || list.length === 0){
+        emptyMsg.style.display='block';
+        return;
+      }
       emptyMsg.style.display='none';
-      list.forEach((p,i) => {
+      list.forEach(p => {
         const card = document.createElement('div');
         card.className = 'card';
-        // Image or fallback
+
         const img = document.createElement('div');
         img.className = 'img';
         if(p.logo){
           img.innerHTML = `<img src="${p.logo}" alt="Project Logo">`;
         }else{
-          img.innerHTML = "<span>"+(p.title? p.title.charAt(0).toUpperCase() : "P")+"</span>";
+          img.innerHTML = `<span>${p.title ? p.title.charAt(0).toUpperCase() : "P"}</span>`;
         }
         card.appendChild(img);
-        const h3 = document.createElement('h3'); h3.textContent = p.title || p.url;
+
+        const h3 = document.createElement('h3');
+        h3.textContent = p.title || p.url;
         card.appendChild(h3);
-        const desc = document.createElement('p'); desc.textContent = p.desc || '';
+
+        const desc = document.createElement('p');
+        desc.textContent = p.desc || '';
         card.appendChild(desc);
+
         const meta = document.createElement('div');
         meta.className = 'meta';
+
         const open = document.createElement('button');
-        open.className = 'openbtn'; open.textContent = 'Open';
-        open.onclick = (e)=>{ e.stopPropagation(); openModal(i); };
+        open.className = "openbtn";
+        open.textContent = "Open";
+        open.onclick = (e) => { e.stopPropagation(); window.open(p.url, '_blank'); };
+
         meta.appendChild(open);
-        const remove = document.createElement('button');
-        remove.className = 'removebtn'; remove.textContent = 'Remove';
-        remove.onclick = (e)=>{ e.stopPropagation(); confirmRemove(i); };
-        meta.appendChild(remove);
         card.appendChild(meta);
+
         grid.appendChild(card);
       });
     }
 
-    let projects = readProjects();
     render(projects);
-
-    document.getElementById('addForm').addEventListener('submit', e=>{
-      e.preventDefault();
-      const title = document.getElementById('title').value.trim();
-      const url = document.getElementById('url').value.trim();
-      const desc = document.getElementById('desc').value.trim();
-      const logo = document.getElementById('logo').value.trim();
-      if(!title || !url) return alert('Please enter title and URL');
-      projects.unshift({title, url, desc, logo});
-      writeProjects(projects);
-      render(projects);
-      // Clear form
-      document.getElementById('title').value='';
-      document.getElementById('url').value='';
-      document.getElementById('desc').value='';
-      document.getElementById('logo').value='';
-    });
-
-    document.getElementById('clearBtn').addEventListener('click', e=>{
-      e.preventDefault();
-      if(confirm('Delete all saved projects from this browser?')){
-        projects=[];writeProjects(projects);render(projects);
-      }
-    });
-
-    document.getElementById('importAnchors').addEventListener('click', ()=>{
-      const html = document.getElementById('raw-links').value;
-      if(!html.trim()) return alert('Paste anchor tags first');
-      const c = document.createElement('div');
-      c.innerHTML = html;
-      const anchors = Array.from(c.querySelectorAll('a'));
-      if(anchors.length === 0) return alert('No anchor tags found');
-      anchors.forEach(a=>{
-        const title = (a.textContent||a.getAttribute('title')||a.href).trim();
-        const url = a.href;
-        projects.unshift({title,url,desc:'',logo:''});
-      });
-      writeProjects(projects);
-      render(projects);
-      document.getElementById('raw-links').value='';
-    });
-
-    const modal = document.getElementById('modal');
-    const modalContent = document.getElementById('modal-content');
-
-    function openModal(idx){
-      const p = projects[idx];
-      let logoHtml = p.logo ? `<img src="${p.logo}" alt="Project Logo" style="width:70px;height:70px;object-fit:contain;margin-bottom:16px;">` : '';
-      modalContent.innerHTML =
-        "<span class='close' onclick='closeModal()'>&times;</span>"+
-        logoHtml +
-        "<h2>"+(p.title||p.url)+"</h2>"+
-        "<p>"+(p.desc||'')+"</p>"+
-        "<a href='"+p.url+"' target='_blank' style='color:#06b6d4;font-weight:bold;'>Open Project</a>";
-      modal.style.display="block";
-    }
-    function closeModal(){ modal.style.display="none"; }
-    window.openModal = openModal; window.closeModal = closeModal;
-    modal.onclick = function(e){ if(e.target === modal) closeModal();}
-
-    function confirmRemove(idx) {
-      const p = projects[idx];
-      const confirmMsg = `Are you sure you want to remove the project:\n"${p.title || p.url}"?`;
-      if(confirm(confirmMsg)){
-        projects.splice(idx,1);
-        writeProjects(projects);
-        render(projects);
-
-      }
-    }
   </script>
 </body>
 </html>
-
