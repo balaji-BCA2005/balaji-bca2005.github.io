@@ -21,19 +21,19 @@
                 title: "Clock Digital",
                 url: "https://balaji-bca2005.github.io/clock.github.io/",
                 desc: "A simple analog/digital clock project.",
-                logo: "clock.png"
+                logo: "iamges/clock.png"
             },
             {
                 title: "Door Shop",
                 url: "https://balaji-bca2005.github.io/door.github.io/",
                 desc: "A simple door shop Web-Design",
-                logo: "D.png"
+                logo: "iamges/D.png"
             },
             {
                 title: "Color Palete",
                 url: " https://balaji-bca2005.github.io/color.github.io/",
                 desc: "Select The color for website ",
-                logo: "color.png"
+                logo: "iamges/color.png"
             }
         ];
 
@@ -158,4 +158,5 @@ darkBtn.onclick = function() {
     const isDark = document.body.classList.contains(darkClass);
     darkBtn.textContent = isDark ? "☀️" : "🌙";
     localStorage.setItem('darkMode', isDark);
+
 };
