@@ -137,7 +137,7 @@
         msgDiv.style.color = "#de381a";
         return;
     }
-    msgDiv.textContent = "Thank you! Your message is not actually sent (demo only).";
+    msgDiv.textContent = "Thank you!.";
     msgDiv.style.color = "#2464df";
     this.reset();
 };
@@ -160,3 +160,4 @@ darkBtn.onclick = function() {
     localStorage.setItem('darkMode', isDark);
 
 };
+
