@@ -40,7 +40,7 @@
         title: "Calculator",
         url:"https://balaji-bca2005.github.io/Calculator/",
         desc: "Use the web based calculator",
-        logo: "iamges/calc.jpg"
+        logo: "iamges/clc.png"
     }
         ];
 
@@ -167,6 +167,7 @@ darkBtn.onclick = function() {
     localStorage.setItem('darkMode', isDark);
 
 };
+
 
 
 
