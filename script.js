@@ -34,12 +34,12 @@
                 url: " https://balaji-bca2005.github.io/color.github.io/",
                 desc: "Select The color for website ",
                 logo: "iamges/color.png"
-            }
+            },
           {
             title: "Calculator",
             url:"https://balaji-bca2005.github.io/Calculator/",
             desc: "Use the web based calculator",
-            logo: "iamges/color.png"
+            logo: "iamges/calc.jpg"
               
           }
         ];
@@ -167,5 +167,6 @@ darkBtn.onclick = function() {
     localStorage.setItem('darkMode', isDark);
 
 };
+
 
 
