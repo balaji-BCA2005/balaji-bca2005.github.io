@@ -18,12 +18,7 @@
 
         const projects = [
             {
-                title: "Clock Digital",
-                url: "https://balaji-bca2005.github.io/clock.github.io/",
-                desc: "A simple analog/digital clock project.",
-                logo: "iamges/clock.png"
-            },
-            {
+                           {
                 title: "Door Shop",
                 url: "https://balaji-bca2005.github.io/door.github.io/",
                 desc: "A simple door shop Web-Design",
@@ -41,7 +36,14 @@
         url:"https://balaji-bca2005.github.io/Calculator/",
         desc: "Use the web based calculator",
         logo: "iamges/clc.png"
-    }
+    },
+          {
+         title: "Placement_System",
+        url:"placement-system-dccl.ct.ws",
+        desc: "Use For Plcement Managemt System in College",
+        logo: "iamges/clg.png"
+          }
+  
         ];
 
         function createCard(p) {
@@ -167,6 +169,7 @@ darkBtn.onclick = function() {
     localStorage.setItem('darkMode', isDark);
 
 };
+
 
 
 
