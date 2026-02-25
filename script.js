@@ -17,7 +17,7 @@
         const modalClose = document.querySelector('.modal-close');
 
        
-         const projects = [
+  const projects = [
     {
         title: "Door Shop",
         url: "https://balaji-bca2005.github.io/door.github.io/",
@@ -167,6 +167,7 @@ darkBtn.onclick = function() {
     localStorage.setItem('darkMode', isDark);
 
 };
+
 
 
 
