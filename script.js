@@ -16,35 +16,33 @@
         const modalGrid = document.getElementById('modalGrid');
         const modalClose = document.querySelector('.modal-close');
 
-        const projects = [
-            {
-                           {
-                title: "Door Shop",
-                url: "https://balaji-bca2005.github.io/door.github.io/",
-                desc: "A simple door shop Web-Design",
-                logo: "iamges/D.png"
-            },
-            {
-                title: "Color Palete",
-                url: " https://balaji-bca2005.github.io/color.github.io/",
-                desc: "Select The color for website ",
-                logo: "iamges/color.png"
-            },
-           
+       
+         const projects = [
+    {
+        title: "Door Shop",
+        url: "https://balaji-bca2005.github.io/door.github.io/",
+        desc: "A simple door shop Web-Design",
+        logo: "images/D.png"
+    },
+    {
+        title: "Color Palette",
+        url: "https://balaji-bca2005.github.io/color.github.io/",
+        desc: "Select the color for website",
+        logo: "images/color.png"
+    },
     {
         title: "Calculator",
-        url:"https://balaji-bca2005.github.io/Calculator/",
+        url: "https://balaji-bca2005.github.io/Calculator/",
         desc: "Use the web based calculator",
-        logo: "iamges/clc.png"
+        logo: "images/clc.png"
     },
-          {
-         title: "Placement_System",
-        url:"placement-system-dccl.ct.ws",
-        desc: "Use For Plcement Managemt System in College",
-        logo: "iamges/clg.png"
-          }
-  
-        ];
+    {
+        title: "Placement System",
+        url: "https://placement-system-dccl.ct.ws",
+        desc: "Use for Placement Management System in College",
+        logo: "images/clg.png"
+    }
+];
 
         function createCard(p) {
             const card = document.createElement('div');
@@ -169,6 +167,7 @@ darkBtn.onclick = function() {
     localStorage.setItem('darkMode', isDark);
 
 };
+
 
 
 
