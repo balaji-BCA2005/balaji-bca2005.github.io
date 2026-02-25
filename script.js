@@ -22,25 +22,25 @@
         title: "Door Shop",
         url: "https://balaji-bca2005.github.io/door.github.io/",
         desc: "A simple door shop Web-Design",
-        logo: "images/D.png"
+        logo: "iamges/D.png"
     },
     {
         title: "Color Palette",
         url: "https://balaji-bca2005.github.io/color.github.io/",
         desc: "Select the color for website",
-        logo: "images/color.png"
+        logo: "iamges/color.png"
     },
     {
         title: "Calculator",
         url: "https://balaji-bca2005.github.io/Calculator/",
         desc: "Use the web based calculator",
-        logo: "images/clc.png"
+        logo: "iamges/clc.png"
     },
     {
         title: "Placement System",
         url: "https://placement-system-dccl.ct.ws",
         desc: "Use for Placement Management System in College",
-        logo: "images/clg.png"
+        logo: "iamges/clg.png"
     }
 ];
 
@@ -167,6 +167,7 @@ darkBtn.onclick = function() {
     localStorage.setItem('darkMode', isDark);
 
 };
+
 
 
 
