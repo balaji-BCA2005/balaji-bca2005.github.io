@@ -40,7 +40,7 @@
         title: "Placement System",
         url: "https://placement-system-dccl.ct.ws",
         desc: "Use for Placement Management System in College",
-        logo: "iamges/clg.png"
+        logo: "iamges/imgclg.png"
     }
 ];
 
@@ -167,6 +167,7 @@ darkBtn.onclick = function() {
     localStorage.setItem('darkMode', isDark);
 
 };
+
 
 
 
