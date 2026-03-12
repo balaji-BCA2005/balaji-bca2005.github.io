@@ -20,7 +20,7 @@
   const projects = [
     {
         title: "Door Shop",
-        url: "https://balaji-bca2005.github.io/door.github.io/",
+        url: "https://balaji-fabrication-ausa.kesug.com/",
         desc: "A simple door shop Web-Design",
         logo: "iamges/D.png"
     },
@@ -167,6 +167,7 @@ darkBtn.onclick = function() {
     localStorage.setItem('darkMode', isDark);
 
 };
+
 
 
 
